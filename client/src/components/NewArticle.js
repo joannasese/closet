@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CreatableSelect from 'react-select/lib/Creatable';
 
 export default class NewArticle extends Component {
   constructor() {
@@ -15,6 +14,12 @@ export default class NewArticle extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount(){
+    fetch('/api/articles')
+      .then((resp) => {return resp.json()})
+      .then((data) => {this.setState( { articles: data })})
   }
 
   handleChange(event) {
@@ -43,6 +48,7 @@ export default class NewArticle extends Component {
   }
 
   render() {
+    console.log(this.state)
     let subcategory;
     if (this.state.category !== ''){
       subcategory =
@@ -112,6 +118,12 @@ export default class NewArticle extends Component {
           </select>
         </label>
         <br/>
+
+        <label>
+        Image:
+          <input type="file" name="image" onChange={this.handleChange}/>
+        </label>
+
         <input type="submit" value="Submit"/>
       </form>
     );

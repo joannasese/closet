@@ -24,7 +24,8 @@ class ArticlesController < ApplicationController
       :material,
       :category,
       :brand,
-      :subcategory
+      :subcategory,
+      :image
     )
   end
 end
